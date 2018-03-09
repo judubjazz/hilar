@@ -46,14 +46,14 @@ class App extends Component {
     handleLogin = () => {
 
     };
-    handleData = (endPoint) => {
-        let test  = fetchData(endPoint);
-        console.log('test' + test.data);
-    };
-
-    handleUpdate = (endPoint) => {
-        let test = this.props.actions.selectSubreddit(endPoint);
-    };
+    // handleData = (endPoint) => {
+    //     let test  = fetchData(endPoint);
+    //     console.log('test' + test.data);
+    // };
+    //
+    // handleUpdate = (endPoint) => {
+    //     let test = this.props.actions.selectSubreddit(endPoint);
+    // };
     handleHeroClick= ()=>{
 
     };
@@ -71,38 +71,38 @@ class App extends Component {
                 <Hero onClick={this.handleHeroClick}/>
 
 
-                {/*<TitleList title="Search Results" selectedSubreddit={this.state.searchUrl}/>*/}
-                {/*<TitleList title="Top picks for You" selectedSubreddit={this.props.username} />*/}
-                <TitleList title="Trending now"  data ={this.handleData('trending')} url='trending' />
-                <TitleList title="Most watched" data ={this.handleData('most_watched')} url='most_watched' />
+                <TitleList title="Search Results" url={this.state.searchUrl}/>
+                <TitleList title="Top picks for You" url={this.props.username} />
+                <TitleList title="Trending now"  url='trending' />
+                <TitleList title="Most watched" url='most_watched' />
             </div>
         );
     }
 
 }
 
-App.propTypes = {
-    actions: PropTypes.object.isRequired,
-    data:PropTypes.array.isRequired,
-    isFetching:PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = state => {
-  //   console.log(state);
-  const { fetch } = state;
-  const {isFetching, data: data} = fetch|| {isFetching: true, data: []};
-
-  return {
-    data,
-    isFetching,
-  }
-};
-const mapDispatchToProps = (dispatch)=> {
-	return {
-		actions: bindActionCreators(actions, dispatch)
-	};
-};
-export default connect(null, mapDispatchToProps)(App)
+// App.propTypes = {
+//     actions: PropTypes.object.isRequired,
+//     data:PropTypes.array.isRequired,
+//     isFetching:PropTypes.bool.isRequired,
+// };
+//
+// const mapStateToProps = state => {
+//   //   console.log(state);
+//   const { fetch } = state;
+//   const {isFetching, data: data} = fetch|| {isFetching: true, data: []};
+//
+//   return {
+//     data,
+//     isFetching,
+//   }
+// };
+// const mapDispatchToProps = (dispatch)=> {
+// 	return {
+// 		actions: bindActionCreators(actions, dispatch)
+// 	};
+// };
+export default App
 
 
 
