@@ -98,7 +98,7 @@ p {
 .Logo {
   width: 151px;
   height: 41px;
-  margin-right: 10px;
+  margin-right: 20px;
   -webkit-transition: margin .125s ease;
   transition: margin .125s ease;
 }
@@ -115,10 +115,10 @@ p {
 }
 .Logo:hover {
   cursor: pointer;
-  margin-top: 2px;
+  margin-top: 0px;
 }
 .Logo:hover svg path {
-  fill: #ffffff !important;
+  /*fill: #ffffff !important;*/
 }
 
 .Navigation ul {
@@ -497,4 +497,45 @@ p {
           justify-content: center;
   height: 32px;
   width: 32px;
+}
+
+.Arrow {
+  cursor:pointer;
+  z-index: 99;
+  position: relative;
+}
+
+.Arrow a{
+    text-decoration: none;;
+    padding: 8px 16px
+}
+.LeftArrow{
+  position: absolute;
+  top:150px;
+  left:15px
+}
+
+.RightArrow{
+position:absolute;
+  top:150px;
+  right: 15px;
+}
+
+.Arrow a:hover{
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #F5B1A6;
+    color: black;
+}
+
+.next {
+    background-color: #F5B1A6;
+    color: black;
+}
+
+.round {
+    border-radius: 50%;
 }

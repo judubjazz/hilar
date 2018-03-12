@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'react-image-resizer';
 
-let logo = require('../data/logo2.png');
+let logo = require('../../data/logo2.png');
 
 // Logo
 export default class Logo extends React.Component{

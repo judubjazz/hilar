@@ -6,7 +6,7 @@ const UserProfile = ({onClick}) => {
     return (
          <div className="UserProfile">
                 <div className="User">
-                    <a className="name" onClick={onClick}>Login</a>
+                    <a className="name" onClick={onClick}>login</a>
                     <div className="image">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/profile/profile-512_1.jpg" alt="login"/>
                     </div>

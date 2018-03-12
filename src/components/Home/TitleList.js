@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Item from './Item'
-// import './App.css';
+import LeftArrow from "./LeftArrow";
+import RightArrow from "./RightArrow";
+// import './Home.css';
 
 
 
@@ -21,16 +23,16 @@ class TitleList extends Component {
         fetch(requestUrl).then((response) => {
             return response.json()
         }).then((data) => {
-            this.setState({data: data, dataBack:data, index:0});
+            this.setState({data: data,});
         }).catch((err) => {
             console.log("There has been an error");
         });
     };
 
-    viewMore = () => {
-        alert(this.state.data.results);
-        console.log(this.state.data);
-    };
+    // viewMore = () => {
+    //     alert(this.state.data.results);
+    //     console.log(this.state.data);
+    // };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.url !== this.props.url && nextProps.url !== '') {
@@ -68,10 +70,13 @@ class TitleList extends Component {
             <div ref="titlecategory" className="TitleList" data-loaded={this.state.mounted}>
                 <div className="Title">
                     <h1>{this.props.title}</h1>
-                    <h1 onClick={this.viewMore}>view more</h1>
+                    <LeftArrow/>
                     <div className="titles-wrapper">
+
                         {titles}
+
                     </div>
+                    <RightArrow/>
                 </div>
             </div>
         );

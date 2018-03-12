@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Logo from './Logo.js';
-import './App.css';
+import './Home.css';
 import Image from 'react-image-resizer';
 
 

@@ -3,8 +3,8 @@ import React from 'react';
 
 const LeftArrow = (props) => {
   return (
-    <div className="backArrow">
-      <i className="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+    <div class="Arrow LeftArrow">
+        <a href="#" className="previous round">&#8249;</a>
     </div>
   );
 }

@@ -2,8 +2,8 @@
 import React from 'react';
 const RightArrow = (props) => {
   return (
-    <div className="nextArrow">
-      <i className="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+    <div className="Arrow RightArrow">
+        <a href="#" class="next round">&#8250;</a>
     </div>
   );
 }

@@ -3,8 +3,8 @@ import Image from 'react-image-resizer';
 import HeroButton from './HeroButton'
 import PropTypes from 'prop-types'
 
-let background_image = require('../data/peru_landscape.jpg');
-let logo = require('../data/logo.png');
+let background_image = require('../../data/peru_landscape.jpg');
+let logo = require('../../data/logo.png');
 
 
 // Hero

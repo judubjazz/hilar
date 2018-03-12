@@ -1,10 +1,5 @@
 import {combineReducers} from 'redux'
-import todos from './todos'
-import visibilityFilter from './visibilityFilter'
-import {
-    SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT,
-    REQUEST_POSTS, RECEIVE_POSTS, START
-} from '../actions'
+import {SELECT_SUBREDDIT, INVALIDATE_SUBREDDIT, REQUEST_POSTS, RECEIVE_POSTS, START} from '../../actions/home.actions'
 
 
 const initialState = {

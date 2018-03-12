@@ -2,27 +2,30 @@ import React from 'react';
 // import App from './App';
 import App from './containers/App.js'
 import './index.css';
+import {BrowserRouter} from 'react-router-dom'
 
-import { render } from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import { createLogger } from 'redux-logger'
-import { Provider } from 'react-redux'
+import {render} from 'react-dom'
+import {createStore, applyMiddleware} from 'redux'
+import {createLogger} from 'redux-logger'
+import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
-import reducer from './reducers'
+import reducer from './reducers/Home/index'
 
-const middleware = [ thunk ];
+const middleware = [thunk];
 if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
+    middleware.push(createLogger())
 }
 
 const store = createStore(
-  reducer,
-  applyMiddleware(...middleware)
+    reducer,
+    applyMiddleware(...middleware)
 );
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
 );

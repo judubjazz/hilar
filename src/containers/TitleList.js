@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import Logo from '../components/Logo';
+import Logo from '../components/Home/Logo';
 import '../App.css';
-import Item from '../components/Item'
-import Hero from '../components/Hero'
-import Navigation from '../components/Navigation'
-import SearchBar from '../components/SearchBar.js'
+import Item from '../components/Home/Item'
+import Hero from '../components/Home/Hero'
+import Navigation from '../components/Home/Navigation'
+import SearchBar from '../components/Home/SearchBar.js'
 import Image from 'react-image-resizer';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import RightArrow from '../components/RightArrow.js';
-import LeftArrow from '../components/LeftArrow.js';
+import RightArrow from '../components/Home/RightArrow.js';
+import LeftArrow from '../components/Home/LeftArrow.js';
 
-import {selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit} from '../actions'
+import {selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit} from '../actions/home.actions'
 
 import data2 from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/data/data' ;
 
