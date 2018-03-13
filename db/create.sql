@@ -19,8 +19,6 @@ create table Customer(
   FOREIGN KEY (id) REFERENCES Address(id_customer)
 );
 
-
-
 create TABLE Account(
   id integer Primary Key,
   is_closed Boolean,
@@ -30,9 +28,10 @@ create TABLE Account(
 );
 
 create table WebUser(
-  id integer PRIMARY KEY ,
-  password varchar(20),
+  username varchar(20) PRIMARY KEY ,
   state varchar(20) CHECK (state IN ('New', 'Active', 'Blocked', 'Banned')),
+  salt integer,
+  hash_password integer,
   id_customer integer,
   FOREIGN KEY (id_customer) REFERENCES Customer(id)
   ON DELETE NO ACTION
@@ -87,10 +86,16 @@ create table Product(
   original_title varchar(20),
   overview varchar(50),
   vote_average varchar(10),
-  backDrop BLOB,
+  backDrop varchar(100),
   category varchar(20),
   trending integer,
   watched integer
+);
+
+create table Sessions (
+  id integer primary key,
+  id_session varchar(32),
+  username varchar(25)
 );
 
 insert into Product VALUES (1,'blue hat','a beautiful blue hat', '1','http://i66.tinypic.com/xg00mb.jpg','hat',1,1);
@@ -112,4 +117,10 @@ insert into Product VALUES (14,'white gloves','torride', '1','http://i63.tinypic
 insert into Product VALUES (15,'pruple hat','nice', '6','http://i67.tinypic.com/30ndr15.jpg','hat',4,15);
 insert into Product VALUES (16,'red hat','navidad!!', '5','http://i64.tinypic.com/29nezo3.jpg','hat',4,16);
 
+insert into Address VALUES (1,1,'beaubien','st-bruno','can', 0,'J3v2v8');
+insert into Customer VALUES (1,'ju','ju','M','450-111-1111','ju@ju.com');
+-- insert into WebUser VALUES ('ju','ju','New', 1,1);
+
 select * from Product;
+select * from Address;
+SELECT * from WebUser;

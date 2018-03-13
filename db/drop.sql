@@ -8,3 +8,4 @@ drop table "Order";
 DROP TABLE LineItem;
 drop TABLE Product;
 drop table Address;
+drop table Sessions;

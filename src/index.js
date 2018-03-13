@@ -1,7 +1,6 @@
 import React from 'react';
 // import App from './App';
 import App from './containers/App.js'
-import './index.css';
 import {BrowserRouter} from 'react-router-dom'
 
 import {render} from 'react-dom'

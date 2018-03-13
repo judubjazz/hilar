@@ -21,6 +21,8 @@ from flask import redirect
 from flask import session
 from flask import Response
 from flask import jsonify
+from flask import make_response
+from flask import abort
 from backend.database import Database
 import hashlib
 import uuid
@@ -57,25 +59,25 @@ def confirmation_page():
     return True
 
 
-@app.route('/formulaire', methods=["GET", "POST"])
+@app.route('/register', methods=["GET", "POST"])
 def formulaire_creation():
     if request.method == "GET":
-        return True
+        pass
     else:
-        username = request.form["username"]
-        password = request.form["password"]
-        email = request.form["email"]
+        username = request.json["username"]
+        password = request.json["password"]
+        # email = request.form["email"]
         # Vérifier que les champs ne sont pas vides
-        if username == "" or password == "" or email == "":
-            return True
+        # if username == "" or password == "" or email == "":
+        #     return True
 
         # TODO Faire la validation du formulaire
         salt = uuid.uuid4().hex
         hashed_password = hashlib.sha512(str(password + salt).encode("utf-8")).hexdigest()
         db = get_db()
-        db.create_user(username, email, salt, hashed_password)
+        db.create_user(username, 'New', salt, hashed_password)
 
-        return True
+        return make_response(jsonify({'success': 'ok'}), 200)
 
 
 @app.route('/login', methods=["POST"])
@@ -88,16 +90,16 @@ def log_user():
 
     user = get_db().get_user_login_info(username)
     if user is None:
-        return False
+        abort(404)
 
     salt = user[0]
-    hashed_password = hashlib.sha512(password + salt).hexdigest()
+    hashed_password = hashlib.sha512(password.encode('utf-8') + salt.encode('utf-8')).hexdigest()
     if hashed_password == user[1]:
         # Accès autorisé
         id_session = uuid.uuid4().hex
         get_db().save_session(id_session, username)
         session["id"] = id_session
-        return True
+        return make_response(jsonify({'success': 'ok'}), 200)
     else:
         return False
 
@@ -130,6 +132,9 @@ def process_query(query):
         response.status_code = 200
         return response
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 # @app.route('/trending', methods=["POST"])

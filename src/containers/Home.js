@@ -64,7 +64,7 @@ class Home extends Component {
                     <Logo/>
                     <Navigation/>
                     <SearchBar onChange={this.handleChange} onKeyUp={this.handleKeyUp} searchTerm={this.state.searchTerm}/>
-                    <UserProfile onClick={this.handleLogin}/>
+                    <UserProfile />
                 </header>
                 <Hero onClick={this.handleHeroClick}/>
 
