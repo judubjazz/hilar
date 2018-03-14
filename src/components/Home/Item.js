@@ -18,10 +18,12 @@ const Item = ({ title, backdrop, score, overview,onClick,toggled }) => {
 };
 
 Item.propTypes = {
-  backdrop: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired
+  // backdrop: PropTypes.string.isRequired,
+  // title: PropTypes.string.isRequired,
+  // score: PropTypes.string.isRequired,
+  // overview: PropTypes.string.isRequired,
+  // onClick:PropTypes.func.isRequired,
+  // toggled:PropTypes.bool.isRequired,
 };
 
 export default Item

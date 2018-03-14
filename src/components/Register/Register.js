@@ -3,18 +3,21 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Image from 'react-image-resizer';
 
-// import { userActions } from '../_actions';
+import { userActions } from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/actions/user.actions.js';
 
-export default class Register extends Component {
+class RegisterPage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             user: {
-                firstName: '',
-                lastName: '',
+                first_name: '',
+                last_name: '',
+                gender:'',
+                phone:'',
+                email:'',
                 username: '',
-                password: ''
+                password: '',
             },
             submitted: false
         };
@@ -39,23 +42,24 @@ export default class Register extends Component {
 
         this.setState({submitted: true});
         const {user} = this.state;
-        // const {dispatch} = this.props;
-        if (user.firstName && user.lastName && user.username && user.password) {
-            const url = 'http://127.0.0.1:5000/register';
-            let data = {...user};
-            // console.log(data);
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {'Content-Type': 'application/json'}
-            }).then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then(response => console.log('Success:', response));
+        const {dispatch} = this.props;
+        if (user.first_name && user.last_name && user.username && user.password && user.gender && user.phone && user.email) {
+            // const url = 'http://127.0.0.1:5000/register';
+            // let data = {...user};
+            // // console.log(data);
+            // fetch(url, {
+            //     method: 'POST',
+            //     body: JSON.stringify(data),
+            //     headers: {'Content-Type': 'application/json'}
+            // }).then(res => res.json())
+            //     .catch(error => console.error('Error:', error))
+            //     .then(response => console.log('Success:', response));
+
+            dispatch(userActions.register(...user));
         }
     }
 
     render() {
-        const background_image = require('../../data/peru_landscape.jpg');
         const logo = require('../../data/logo.png');
         const {registering} = this.props;
         const {user, submitted} = this.state;
@@ -67,15 +71,30 @@ export default class Register extends Component {
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Register</h2>
 
-                    <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange}/>
-                        {submitted && !user.firstName && <div className="help-block">First Name is required</div>}
+                    <div className={'form-group' + (submitted && !user.first_name ? ' has-error' : '')}>
+                        <label htmlFor="first_name">First Name</label>
+                        <input type="text" className="form-control" name="first_name" value={user.first_name} onChange={this.handleChange}/>
+                        {submitted && !user.first_name && <div className="help-block">First Name is required</div>}
                     </div>
-                    <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange}/>
-                        {submitted && !user.lastName && <div className="help-block">Last Name is required</div>}
+                    <div className={'form-group' + (submitted && !user.last_name ? ' has-error' : '')}>
+                        <label htmlFor="last_name">Last Name</label>
+                        <input type="text" className="form-control" name="last_name" value={user.last_name} onChange={this.handleChange}/>
+                        {submitted && !user.last_name && <div className="help-block">Last Name is required</div>}
+                    </div>
+                    <div className={'form-group' + (submitted && !user.gender ? ' has-error' : '')}>
+                        <label htmlFor="gender">Gender</label>
+                        <input type="text" className="form-control" name="gender" value={user.gender} onChange={this.handleChange}/>
+                        {submitted && !user.gender && <div className="help-block">Gender is required</div>}
+                    </div>
+                    <div className={'form-group' + (submitted && !user.phone ? ' has-error' : '')}>
+                        <label htmlFor="phone">Phone Number</label>
+                        <input type="text" className="form-control" name="phone" value={user.phone} onChange={this.handleChange}/>
+                        {submitted && !user.phone && <div className="help-block">Phone Number is required</div>}
+                    </div>
+                    <div className={'form-group' + (submitted && !user.email ? ' has-error' : '')}>
+                        <label htmlFor="email">Email</label>
+                        <input type="text" className="form-control" name="email" value={user.email} onChange={this.handleChange}/>
+                        {submitted && !user.email && <div className="help-block">Email is required</div>}
                     </div>
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
@@ -94,18 +113,19 @@ export default class Register extends Component {
                         <Link to="/login" className="btn btn-link">Cancel</Link>
                     </div>
 
+
                 </div>
             </div>
         );
     }
 }
 
-// function mapStateToProps(state) {
-//     const { registering } = state.registration;
-//     return {
-//         registering
-//     };
-// }
-//
-// const connectedRegisterPage = connect(mapStateToProps)(RegisterPage);
-// export { connectedRegisterPage as RegisterPage };
+function mapStateToProps(state) {
+    const { registering } = state.registration;
+    return {
+        registering
+    };
+}
+
+const connectedRegisterPage = connect(mapStateToProps)(RegisterPage);
+export { connectedRegisterPage as Register };

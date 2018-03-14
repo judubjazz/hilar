@@ -21,7 +21,7 @@ import {fetchData} from "../actions/home.actions";
 /////////////////
 
 // Container
-class Home extends Component {
+class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -58,19 +58,20 @@ class Home extends Component {
 
     };
     render() {
+        const {user} = this.props;
         return (
             <div>
                 <header className="Header">
                     <Logo/>
                     <Navigation/>
                     <SearchBar onChange={this.handleChange} onKeyUp={this.handleKeyUp} searchTerm={this.state.searchTerm}/>
-                    <UserProfile />
+                    <UserProfile user={user} />
                 </header>
                 <Hero onClick={this.handleHeroClick}/>
 
 
                 <TitleList title="Search Results" url={this.state.searchUrl}/>
-                <TitleList title="Top picks for You" url={this.state.username} />
+                <TitleList title="Recommanded for You" url={user?user:''} />
                 <TitleList title="Trending now"  url='trending' />
                 <TitleList title="Most watched" url='most_watched' />
             </div>
@@ -79,28 +80,35 @@ class Home extends Component {
 
 }
 
-// App.propTypes = {
+// HomePage.propTypes = {
 //     actions: PropTypes.object.isRequired,
 //     data:PropTypes.array.isRequired,
 //     isFetching:PropTypes.bool.isRequired,
+//     username:PropTypes.string.isRequired,
 // };
-//
-// const mapStateToProps = state => {
-//   //   console.log(state);
-//   const { fetch } = state;
-//   const {isFetching, data: data} = fetch|| {isFetching: true, data: []};
-//
-//   return {
-//     data,
-//     isFetching,
-//   }
-// };
-// const mapDispatchToProps = (dispatch)=> {
-// 	return {
-// 		actions: bindActionCreators(actions, dispatch)
-// 	};
-// };
-export default Home
+
+const mapStateToProps = state => {
+  // //   console.log(state);
+  // const { fetch } = state;
+  // const {isFetching, data: data} = fetch|| {isFetching: true, data: []};
+  //
+  // return {
+  //   data,
+  //   isFetching,
+  // }
+
+    const { users, authentication } = state;
+    const { user } = authentication;
+    return {
+        user,
+        users
+    };
+};
+
+
+const connectedHomePage = connect(mapStateToProps)(HomePage);
+export { connectedHomePage as HomePage };
+
 
 
 

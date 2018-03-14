@@ -1,80 +1,70 @@
-// import {HANDLE_KEY_UP,HANDLE_SEARCH_TERM,REQUEST_POSTS,RECEIVE_POSTS,SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,START} from '../constant/constant'
-// import axios from 'axios';
+
 // import * as types from '../../constants/actionTypes';
+import {homeConstants} from '../constants';
 
-
-// let nextTodoId = 0;
-
-export const REQUEST_POSTS = 'REQUEST_POSTS';
-export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const SELECT_SUBREDDIT = 'SELECT_SUBREDDIT';
-export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT';
-export const START = 'START';
-export const HANDLE_SEARCH_TERM = 'HANDLE_SEARCH_TERM';
-export const HANDLE_KEY_UP = 'HANDLE_KEY_UP';
 
 
 
 
 export const setVisibilityFilter = (filter) => ({
-    type: 'SET_VISIBILITY_FILTER',
+    type: homeConstants.SET_VISIBILITY_FILTER,
     filter
 });
 
 
 export const handleKeyUp = (id) => ({
-    type: 'HANDLE_KEY_UP',
+    type: homeConstants.HANDLE_KEY_UP,
     id
 });
 
 
 export const handleSearchTerm = (id) => ({
-    type: 'HANDLE_SEARCH_TERM',
+    type: homeConstants.HANDLE_SEARCH_TERM,
     id
 });
 
 
 export const setInitialState = (id) => ({
-    type: 'START',
+    type: homeConstants.START,
     id
 });
 
 export const toggleList = (id) => ({
-    type: 'TOGGLE_TODO',
+    type: homeConstants.TOGGLE_TODO,
     id
 });
 
 
 export const viewNext = (id) => ({
-    type: 'VIEW_NEXT',
+    type: homeConstants.VIEW_NEXT,
     id
 });
 
 
 export const viewPrevious = (id) => ({
-    type: 'VIEW_PREVIOUS',
+    type: homeConstants.VIEW_PREVIOUS,
     id
 });
 
 export const selectSubreddit = subreddit => ({
-  type: SELECT_SUBREDDIT,
+  type: homeConstants.SELECT_SUBREDDIT,
   subreddit
 });
 
 export const invalidateSubreddit = subreddit => ({
-  type: INVALIDATE_SUBREDDIT,
+  type: homeConstants.INVALIDATE_SUBREDDIT,
   subreddit
 });
 
 export const requestPosts = subreddit => ({
-  type: REQUEST_POSTS,
+  type: homeConstants.REQUEST_POSTS,
   subreddit
 });
 
 export const receivePosts = (subreddit, json) =>
 (
     {
-      type: RECEIVE_POSTS,
+      type: homeConstants.RECEIVE_POSTS,
       subreddit,
       data: json.results.map(child => child),
     }

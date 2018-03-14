@@ -2,24 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const UserProfile = () => {
-// console.log(searchTerm)
+const UserProfile = (user) => {
+// console.log(user);
+let username = user.user;
+if (username !== undefined) {
+    username = user.user.user
+}else{
+    username='user'
+}
+
+
     return (
          <div className="UserProfile">
                 <div className="User">
                     {/*<a className="name" onClick={onClick}>login</a>*/}
-                    <Link to="/login" className="name">login</Link>
+                    {user.user && <div className='name'>{username}</div>}
+                    {!user.user && <Link to="/login" className="name">login</Link>}
                     <div className="image">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/profile/profile-512_1.jpg" alt="login"/>
+                        <img src="https://d2az0yupc2akbm.cloudfront.net/vanguardistas.publicview/4.108/static/images/socialmedia/yahoo.gif" alt="login"/>
                     </div>
                 </div>
         </div>
     );
 };
 
-// UserProfile.propTypes = {
-//     onClick: PropTypes.func.isRequired,
-//
-// };
+UserProfile.propTypes = {
+    // user: PropTypes.object.isRequired,
+
+};
+
 
 export default UserProfile;

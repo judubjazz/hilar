@@ -1,8 +1,12 @@
-import React, {Component} from 'react';
+// import React from 'react';
+import React, { Component } from 'react'
 import Logo from './Logo.js';
-import './Home.css';
+import './App.css';
 import Image from 'react-image-resizer';
+import RightArrow from './RightArrow.js';
+import LeftArrow from './LeftArrow.js';
 
+import data2 from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/data/data' ;
 
 /////////////////
 /// COMPONENTS //
@@ -56,7 +60,7 @@ export default class App extends Component {
 
 
 // Navigation
-class Navigation extends React.Component {
+class Navigation extends Component {
     render() {
         return (
             <div id="navigation" className="Navigation">
@@ -74,7 +78,7 @@ class Navigation extends React.Component {
 };
 
 // User Profile
-class UserProfile extends React.Component {
+class UserProfile extends Component {
     handleLogin = () => {
 
     };
@@ -103,7 +107,7 @@ let background_image = require('./data/peru_landscape.jpg');
 let logo = require('./data/logo.png');
 
 //src="http://www.returndates.com/backgrounds/narcos.logo.png"
-class Hero extends React.Component {
+class Hero extends Component {
     render() {
         return (
             <div id="hero" className="Hero" style={{backgroundImage: 'url(' + background_image + ')'}}>
@@ -133,7 +137,7 @@ class Hero extends React.Component {
 /**
  * button buy it now and +list
  */
-class HeroButton extends React.Component {
+class HeroButton extends Component {
     handleClick = () => {
         if (this.props.primary) {
             //hanlde buy it now
@@ -159,7 +163,7 @@ class HeroButton extends React.Component {
  * div inline to show products
  * ex:trending now
  */
-class TitleList extends React.Component {
+class TitleList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -239,7 +243,7 @@ class TitleList extends React.Component {
 /**
  * description of the item inside a title
  */
-class Item extends React.Component {
+class Item extends Component {
     componentWillReceiveProps(nextProps, prevProps) {
 
     }
@@ -259,7 +263,7 @@ class Item extends React.Component {
 };
 
 // ListToggle
-class ListToggle extends React.Component {
+class ListToggle extends Component {
     constructor(props) {
         super(props);
         this.state = {toggled: false,}

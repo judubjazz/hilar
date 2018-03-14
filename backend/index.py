@@ -26,6 +26,7 @@ from flask import abort
 from backend.database import Database
 import hashlib
 import uuid
+import json
 from functools import wraps
 
 app = Flask(__name__)
@@ -60,13 +61,17 @@ def confirmation_page():
 
 
 @app.route('/register', methods=["GET", "POST"])
-def formulaire_creation():
+def register():
     if request.method == "GET":
         pass
     else:
         username = request.json["username"]
         password = request.json["password"]
-        # email = request.form["email"]
+        email = request.json["email"]
+        first_name = request.json['first_name']
+        last_name = request.json['last_name']
+        gender = request.json['gender']
+        phone = request.json['phone']
         # Vérifier que les champs ne sont pas vides
         # if username == "" or password == "" or email == "":
         #     return True
@@ -75,7 +80,7 @@ def formulaire_creation():
         salt = uuid.uuid4().hex
         hashed_password = hashlib.sha512(str(password + salt).encode("utf-8")).hexdigest()
         db = get_db()
-        db.create_user(username, 'New', salt, hashed_password)
+        db.create_user(username, 'New', salt, hashed_password, first_name, last_name, gender, phone, email)
 
         return make_response(jsonify({'success': 'ok'}), 200)
 
@@ -99,9 +104,9 @@ def log_user():
         id_session = uuid.uuid4().hex
         get_db().save_session(id_session, username)
         session["id"] = id_session
-        return make_response(jsonify({'success': 'ok'}), 200)
+        return make_response(jsonify({'user': username}), 200)
     else:
-        return False
+        return make_response(jsonify({'ok': 'false'}), 401)
 
 
 @app.route('/<query>', methods=["POST", "GET"])
@@ -124,6 +129,8 @@ def process_query(query):
         response.status_code = 200
         return response
     else:
+        query = json.loads(query)
+        print(query)
         query_result = get_db().get_query(query)
         data={
             'results':query_result

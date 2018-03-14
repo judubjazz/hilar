@@ -22,22 +22,24 @@ class Database:
 
     def get_connection(self):
         if self.connection is None:
-            self.connection = sqlite3.connect('db/database.db')
-            # self.connection = sqlite3.connect('/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/db/database.db')
+            # self.connection = sqlite3.connect('db/database.db')
+            self.connection = sqlite3.connect('/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/db/database.db')
         return self.connection
 
     def disconnect(self):
         if self.connection is not None:
             self.connection.close()
 
-    def create_user(self, username, state,salt, hashed_password):
+    def create_user(self, username, state,salt, hashed_password, first_name, last_name, gender, phone, email):
         connection = self.get_connection()
         cursor = connection.cursor()
         cursor.execute("select MAX(id) from Customer")
         id_customer = cursor.fetchone()[0]
-        id_customer += 1
         connection.execute(("insert into WebUser(username,state, salt, hash_password, id_customer)"
-                            " values(?, ?, ?, ?, ?)"), (username, state,salt, hashed_password, id_customer))
+                            " values(?, ?, ?, ?, ?)"), (username, state, salt, hashed_password, id_customer))
+        connection.commit()
+        connection.execute(("insert into Customer(id,first_name, last_name, gender, phone, email)"
+                            " values(?, ?, ?, ?, ?, ?)"), (id_customer, first_name, last_name, gender, phone, email))
         connection.commit()
 
     def get_user_login_info(self, username):
@@ -97,6 +99,16 @@ class Database:
             return [(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]) for data in datas]
 
     def get_most_watched(self):
+        cursor = self.get_connection().cursor()
+        cursor.execute("select * from Product where watched > 6")
+        #3 is the highest trending note
+        datas = cursor.fetchall()
+        if datas is None:
+            return None
+        else:
+            return [(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7]) for data in datas]
+
+    def get_recommanded_for_you(self):
         cursor = self.get_connection().cursor()
         cursor.execute("select * from Product where watched > 6")
         #3 is the highest trending note

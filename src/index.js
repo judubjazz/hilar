@@ -1,14 +1,13 @@
 import React from 'react';
-// import App from './App';
-import App from './containers/App.js'
-import {BrowserRouter} from 'react-router-dom'
+import {App} from './App';
+
 
 import {render} from 'react-dom'
 import {createStore, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk';
-import reducer from './reducers/Home/index'
+import rootreducer from './reducers'
 
 const middleware = [thunk];
 if (process.env.NODE_ENV !== 'production') {
@@ -16,15 +15,14 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const store = createStore(
-    reducer,
+    rootreducer,
     applyMiddleware(...middleware)
 );
 
 render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </BrowserRouter>,
+    <Provider store={store}>
+        <App/>
+    </Provider>
+    ,
     document.getElementById('root')
 );

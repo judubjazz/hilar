@@ -14,9 +14,9 @@ const ListToggle = ({ onClick, toggled, text }) => {
 }
 
 ListToggle.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  toggled: PropTypes.bool.isRequired,
-}
+  // onClick: PropTypes.func.isRequired,
+  // toggled: PropTypes.bool.isRequired,
+};
 
 export default ListToggle
 

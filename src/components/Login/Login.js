@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom';
 import Image from 'react-image-resizer';
 // import './Login.css'
 import {connect} from 'react-redux';
-// import { userActions } from '../_actions';
+import { userActions } from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/actions/user.actions.js';
 
-export default class Login extends Component {
+class LoginPage extends Component {
     constructor(props) {
         super(props);
 
@@ -15,7 +15,8 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            submitted: false
+            submitted: false,
+            error:false
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,28 +35,15 @@ export default class Login extends Component {
         const {username, password} = this.state;
         const {dispatch} = this.props;
         if (username && password) {
-            // dispatch(userActions.login(username, password));
-            let url = 'http://127.0.0.1:5000/login';
-            let data = {username: username, password: password};
-
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {'Content-Type': 'application/json'}
-            }).then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then(response => {
-                    console.log('Success:', response);
-                    document.location.href="/";
-                });
+            dispatch(userActions.login(username, password));
         }
     }
 
     render() {
         const background_image = require('../../data/peru_landscape.jpg');
         const logo = require('../../data/logo.png');
-        const {loggingIn} = this.props;
-        const {username, password, submitted} = this.state;
+        const {loggingIn, alert} = this.props;
+        const {username, password, submitted, error} = this.state;
         return (
 
             <div className="Hero-login">
@@ -65,7 +53,8 @@ export default class Login extends Component {
 
                 <div className="col-md-6 col-md-offset-3 ">
                     <h2>Login</h2>
-
+                    {error && <div className="help-block">Wrong password or Username</div>}
+                    {alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div>}
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" name="username" value={username} onChange={this.handleChange}/>
@@ -75,6 +64,7 @@ export default class Login extends Component {
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" name="password" value={password} onChange={this.handleChange}/>
                         {submitted && !password && <div className="help-block">Password is required</div>}
+
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary" onClick={this.handleSubmit}>Login</button>
@@ -87,13 +77,15 @@ export default class Login extends Component {
         );
     }
 }
-//
-// function mapStateToProps(state) {
-//     const { loggingIn } = state.authentication;
-//     return {
-//         loggingIn
-//     };
-// }
-//
-// const connectedLoginPage = connect(mapStateToProps)(LoginPage);
-// export { connectedLoginPage as Login };
+
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    const {alert} = state;
+    return {
+        loggingIn,
+        alert
+    };
+}
+
+const connectedLoginPage = connect(mapStateToProps)(LoginPage);
+export { connectedLoginPage as Login };
