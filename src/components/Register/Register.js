@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Image from 'react-image-resizer';
 
-import { userActions } from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/actions/user.actions.js';
+import { userActions } from '../../actions/user.actions.js';
 
 class RegisterPage extends Component {
     constructor(props) {

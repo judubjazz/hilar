@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Image from 'react-image-resizer';
 // import './Login.css'
 import {connect} from 'react-redux';
-import { userActions } from '/home/ju/JetBrainsProjects/PycharmProjects/hilar/hilar/src/actions/user.actions.js';
+import { userActions } from '../../actions/alert.actions.js';
 
 class LoginPage extends Component {
     constructor(props) {
